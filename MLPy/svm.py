@@ -38,3 +38,24 @@ a=-w[0]/w[1]
 xx=np.linspace(-5,5)
 yy=a*xx-(clf.intercept_[0])/w[1]
 
+#在此处就是带入求值
+b=clf.support_vectors_[0]
+yy_down=a*xx+(b[1]-a*b[0])
+b=clf.support_vectors_[-1]
+yy_up=a*xx+(b[1]-a*b[0])
+
+print 'w:', w
+print 'a:', a
+
+print 'support_vector:', clf.support_vectors_
+print 'clf.coef_:', clf.coef_
+
+pl.plot(xx, yy, 'k-')
+pl.plot(xx,yy_down,'k--')
+pl.plot(xx,yy_up,'kk--')
+
+pl.scatter(clf.support_vectors_[:,0], clf.support_vectors_[:,1],
+            set=80,facecolors='none')
+pl.scatter(X[:,0], X[:1], c=Y, cmap=pl.cm.Paired)
+pl.axis('tight')
+pl.show()
